@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khuyến Mãi - FORMAN Barber</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    /* ==================== HEADER ==================== */
+/* ===== HEADER FIX CHUẨN ===== */
+header {
+  background: #ffffff;
+  padding: 10px 0;
+}
+
+.top-nav {
+  max-width: 1300px;
+  margin: auto;
+  padding: 14px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f2f2f2;
+  border-radius: 16px;
+}
+
+/* logo */
+.logo {
+  font-size: 36px;
+  font-weight: 900;
+  color: #000;
+}
+
+/* menu + login chung 1 hàng */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* menu */
+.nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #00bcd4;
+}
+
+/* nút login */
+.btn-login {
+  background: #17a2b8;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+
+    /* ==================== HERO & BOOKING (GỮI NGUYÊN) ==================== */
+    .hero { background: #111; color: white; padding: 40px 20px 60px; text-align: center; }
+    .hair-images { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
+    .hair-images img { width: 280px; height: 220px; object-fit: cover; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    .hero h1 { font-size: 28px; margin-bottom: 8px; }
+    .hero p { font-size: 16px; opacity: 0.9; }
+
+    .booking-box {
+      max-width: 820px;
+      margin: -50px auto 50px;
+      background: #111;
+      color: white;
+      border-radius: 12px;
+      padding: 25px 30px;
+      text-align: center;
+    }
+    .booking-form { display: flex; gap: 12px; max-width: 520px; margin: 0 auto; }
+    .booking-form input {
+      flex: 1;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .booking-form button {
+      background: #00bfff;
+      color: white;
+      border: none;
+      padding: 0 32px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ==================== PROMO CARD ==================== */
+    .promo-section {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 900;
+      margin-bottom: 50px;
+      color: #111;
+      letter-spacing: -1px;
+    }
+
+    .promo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 30px;
+    }
+
+    .promo-card {
+      background: linear-gradient(145deg, #1a1a1a, #252525);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      border: 1px solid rgba(255, 215, 0, 0.15);
+    }
+
+    .promo-card:hover {
+      transform: translateY(-18px);
+      box-shadow: 0 30px 60px rgba(255, 215, 0, 0.25);
+      border-color: #ffd700;
+    }
+
+    .promo-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #ffd700, #ffaa00, #ffd700);
+      background-size: 200% 100%;
+      animation: shine 4s linear infinite;
+    }
+
+    @keyframes shine {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .card-title {
+      background: linear-gradient(90deg, #ffd700, #ffaa00);
+      color: #000;
+      text-align: center;
+      padding: 22px 15px;
+      font-size: 24px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .card-body {
+      padding: 30px 28px 35px;
+      text-align: center;
+    }
+
+    .promo-desc {
+      color: #e0e0e0;
+      font-size: 16px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .date-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .date-row {
+      background: rgba(255,255,255,0.07);
+      padding: 15px 20px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(255,215,0,0.2);
+    }
+
+    .date-label {
+      color: #ffd700;
+      font-weight: 600;
+      font-size: 15.5px;
+    }
+
+    .date-value {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    .btn-book {
+      background: linear-gradient(90deg, #ffd700, #ffcc00);
+      color: #000;
+      width: 100%;
+      padding: 18px;
+      font-size: 18px;
+      font-weight: 900;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s;
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-book:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 20px 40px rgba(255, 215, 0, 0.55);
+      background: linear-gradient(90deg, #ffcc00, #ffd700);
+    }
+
+    footer {
+  background: #020b2c;
+  color: #fff;
+  padding: 70px 30px;
+}
+
+.footer-content {
+  max-width: 1300px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+}
+
+.footer-column h3 {
+  border-bottom: 2px solid #00d4ff;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.footer-column a {
+  color: #ccc;
+}
+
+.footer-column a:hover {
+  color: #00d4ff;
+}
+
+.payment-methods img {
+  background: white;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 5px;
+  height: 40px;
+}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="top-nav">
+      <div class="logo">FORMAN</div>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="https://datlichlamtoc.id.vn/index.html">Trang chủ</a>
+          <a href="https://forman-omega.vercel.app/">Dịch vụ</a>
+          <a href="https://giaodiendatlich.vercel.app/">Khuyến mãi</a>
+          <a href="https://datlichlamtoc.id.vn/about.html">Về chúng tôi</a>
+        </div>
+       <a href="https://tranthitrucly.io.vn/loginuser" class="btn-login">Đăng nhập</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO (giữ nguyên) -->
+  <div class="hero">
+    <div class="hair-images">
+      <img src="./image/m1.webp" alt="Hair 1">
+      <img src="./image/m2.jpg" alt="Hair 2">
+      <img src="./image/m3.webp" alt="Hair 3">
+    </div>
+    <h1>Đặt lịch cắt tóc nam dễ dàng với FORMAN</h1>
+    <p>Nhanh chóng - Tiện lợi - Chuyên nghiệp</p>
+  </div>
+
+  
+
+
+  <!-- KHUYẾN MÃI - THIẾT KẾ MỚI -->
+  <div class="promo-section">
+    <h2 class="section-title">ƯU ĐÃI ĐANG CHÁY 🔥</h2>
+    <div class="promo-grid" id="promoGrid"></div>
+  </div>
+
+  <!-- FOOTER (giữ nguyên) -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>VỀ CHÚNG TÔI</h3>
+        <ul>
+          <li><a href="https://datlichlamtoc.id.vn/about.html">Giới thiệu về FORMAN</a></li>
+          <li><a href="#">Tin tức</a></li>
+          <li><a href="#">Tìm FORMAN gần nhất</a></li>
+          <li><a href="#">Blog chăm sóc tóc</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>LIÊN HỆ</h3>
+        <ul>
+          <li>HOTLINE: <strong>1900.27.27.03</strong></li>
+          <li>EMAIL: formanvn@gmail.com</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>THÔNG TIN</h3>
+        <ul>
+          <li>Giờ phục vụ: Thứ 2 - Chủ Nhật, 8h30 - 20h30</li>
+          <li><a href="#">Chính sách bảo mật</a></li>
+          <li><a href="#">Điều kiện giao dịch chung</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>HÌNH THỨC THANH TOÁN</h3>
+        <div class="payment-methods">
+          <img src="/image/money.jpg" alt="Tiền mặt">
+          <img src="/image/qr.jpg" alt="Chuyển khoản">
+          <img src="/image/apple_pay.jpg" alt="Apple Pay">
+          <img src="/image/visa.jpg" alt="Visa">
+          <img src="/image/mastercard.jpg" alt="Mastercard">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const apiResponse = {
+      "status": true,
+      "data": [
+        { "tenkhuyenmai": "Săn sale 5/4", "thoigian_apdung": "2026-04-05 00:00:00", "thoigian_ketthuc": "2026-04-06 00:00:00", "giatri": 3 },
+        { "tenkhuyenmai": "Săn sale 4/4", "thoigian_apdung": "2026-04-04 00:00:00", "thoigian_ketthuc": "2026-04-05 00:00:00", "giatri": 2.5 },
+        { "tenkhuyenmai": "Khách hàng thành viên", "thoigian_apdung": "2026-04-30 00:00:00", "thoigian_ketthuc": "2026-05-01 00:00:00", "giatri": 5 }
+      ]
+    };
+
+    function formatDate(datetime) {
+      const date = new Date(datetime);
+      return `${date.getDate().toString().padStart(2,'0')}/${(date.getMonth()+1).toString().padStart(2,'0')}/${date.getFullYear()}`;
+    }
+
+    function renderPromos() {
+      const container = document.getElementById('promoGrid');
+      container.innerHTML = '';
+
+      apiResponse.data.forEach(promo => {
+        const cardHTML = `
+          <div class="promo-card">
+            <div class="card-title">${promo.tenkhuyenmai}</div>
+            <div class="card-body">
+              <p class="promo-desc">Ưu đãi đặc biệt dành cho khách hàng FORMAN</p>
+              
+              <div class="date-container">
+                <div class="date-row">
+                  <span class="date-label">BẮT ĐẦU</span>
+                  <span class="date-value">${formatDate(promo.thoigian_apdung)}</span>
+                </div>
+                <div class="date-row">
+                  <span class="date-label">KẾT THÚC</span>
+                  <span class="date-value">${formatDate(promo.thoigian_ketthuc)}</span>
+                </div>
+              </div>
+
+              <button class="btn-book" onclick="claimPromo('${promo.tenkhuyenmai}', ${promo.giatri})">
+                ĐẶT LỊCH NGAY
+              </button>
+            </div>
+          </div>
+        `;
+        container.innerHTML += cardHTML;
+      });
+    }
+
+  function claimPromo(name, value) {
+  window.location.href = "https://tranthitrucly.io.vn/datlich";
+}
+    function bookAppointment() {
+      const phone = document.getElementById('phone').value.trim();
+      if (phone) {
+        alert(`Cảm ơn bạn! Chúng tôi sẽ liên hệ qua số ${phone} để xác nhận lịch cắt tóc.`);
+      } else {
+        alert("Vui lòng nhập số điện thoại!");
+      }
+    }
+
+    window.onload = renderPromos;
+  </script>
+  <div style="
+position: fixed;
+right: 25px;
+bottom: 25px;
+background: #00bcd4;
+width: 55px;
+height: 55px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 22px;
+cursor: pointer;
+"
+onclick="window.scrollTo({top:0,behavior:'smooth'})">
+↑
+</div>
+</body>
+</html>
