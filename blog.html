@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog chăm sóc tóc - FORMAN</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .blog-title-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #0e3a80, #00bcd4);
+            color: white;
+            margin-bottom: 40px;
+            border-radius: 8px;
+        }
+
+        .blog-title-section h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .blog-title-section p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .blog-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 5px;
+        }
+
+        .blog-posts {
+            display: grid;
+            gap: 30px;
+        }
+
+        .blog-post {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .blog-post:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .blog-post-header {
+            display: none;
+        }
+
+        .blog-post-header.post2 {
+            display: none;
+        }
+
+        .blog-post-content {
+            padding: 30px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .blog-post-content h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .blog-post-content p {
+            margin-bottom: 16px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .blog-post-meta {
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .blog-post-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-post-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .blog-post-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #666;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .read-more {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .blog-main-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 60px;
+        }
+
+        .blog-section-title {
+            font-size: 22px;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+        }
+
+        section.carousel-section {
+            margin-bottom: 15px;
+            margin-top: 0;
+        }
+
+        section.carousel-section .carousel-header {
+            margin-bottom: 0;
+            text-align: center;
+            justify-content: center !important;
+        }
+
+        section.carousel-section .carousel-title {
+            margin: 0;
+            padding: 0;
+            text-align: center !important;
+            font-size: 24px !important;
+            font-weight: bold !important;
+            color: #0e3a80 !important;
+            border-left: 4px solid #0e3a80 !important;
+            padding-left: 15px !important;
+        }
+
+        section.carousel-section:nth-of-type(2) .carousel-header {
+            justify-content: flex-start !important;
+        }
+
+        section.carousel-section:nth-of-type(2) .carousel-title {
+            text-align: left !important;
+            border-left: 4px solid #0e3a80 !important;
+            padding-left: 15px !important;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            padding: 8px 15px;
+            margin: 0 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 14px;
+            width: 200px;
+            color: #333;
+        }
+
+        .search-bar input::placeholder {
+            color: #999;
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #667eea;
+            margin-left: 10px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            color: #764ba2;
+        }
+
+        @media (max-width: 768px) {
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .search-bar input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div class="nav-bar_left">
+            <div class="nav-bar_logo">FORMAN</div>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm dịch vụ...">
+            <button title="Tìm kiếm">🔍</button>
+        </div>
+
+        <div class="nav-bar_right">
+            <button class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-bar_menu" id="navMenu">
+                <a href="https://datlichlamtoc.id.vn/index.html#">Trang chủ</a>
+                <a href="https://forman-omega.vercel.app/service.html">Dịch vụ</a>
+                <a href="https://giaodiendatlich.vercel.app/index.html">Khuyến mãi</a>
+                <a href="https://datlichlamtoc.id.vn/about.html">Về chúng tôi</a>
+                <div class="form_button">
+                    <a href="https://tranthitrucly.io.vn/loginuser" class="btn-action nav-login-btn">Đăng nhập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <section class="carousel-section">
+        <div class="carousel-header">
+            <h2 class="carousel-title">BÀI 1: CÁCH CHĂM SÓC TÓC HÀNG NGÀY</h2>
+        </div>
+    </section>
+
+    <div class="blog-container">
+        <div class="blog-posts">
+            <div class="blog-post">
+                <div class="blog-post-content">
+                    <h2 style="text-align: left; margin-bottom: 20px;">Cách chăm sóc tóc hàng ngày</h2>
+                    <div class="blog-post-meta">
+                        <span>📅 15/04/2026</span>
+                        <span>⏱️ 8 phút đọc</span>
+                    </div>
+                    
+                    <p><strong>Giới thiệu:</strong></p>
+                    <p>Bên cạnh việc đi cắt tóc định kỳ tại FORMAN, chăm sóc tóc hàng ngày là yếu tố quyết định giúp mái tóc của bạn luôn khỏe mạnh, bóng mượt và cuốn hút. Một quy trình chăm sóc đúng cách không chỉ giúp kéo dài tuổi thọ của tóc mà còn phòng ngừa các vấn đề như gãy, rụng, khô xơ. Hãy cùng FORMAN tìm hiểu 5 bước chăm sóc tóc nam đơn giản nhưng hiệu quả mà bạn nên áp dụng hàng ngày.</p>
+
+                    <p><strong>Bước 1: Gội tóc với nước ấm</strong></p>
+                    <p>Hãy bắt đầu bằng cách gội tóc bằng nước ấm (không nên quá nóng vì có thể làm tổn thương da đầu). Nước ấm giúp mở lỗ chân lông, dễ dàng làm sạch bụi, bụi bẩn và dịch bã nhằn tích tụ trên tóc và da đầu. Massage da đầu nhẹ nhàng trong 2-3 phút để kích thích lưu thông máu và sảng khoái tâm trí.</p>
+
+                    <p><strong>Bước 2: Sử dụng dầu gội phù hợp</strong></p>
+                    <p>Chọn dầu gội phù hợp với loại tóc của bạn (tóc dầu, tóc khô, tóc hỗn hợp). Lấy lượng dầu vừa đủ (khoảng một nắm tay), pha loãng với nước, sau đó massage từ từ từ da đầu xuống ngọn tóc. Đừng chà xát mạnh tay vì điều này có thể gây tổn thương lớp protein ngoài tóc. Gội sạch với nước ấm cho đến khi không còn bọt xà phòng.</p>
+
+                    <p><strong>Bước 3: Dưỡng tóc với dầu xả</strong></p>
+                    <p>Sau khi gội sạch, thoa dầu xả lên phần giữa và ngọn tóc (không cần thoa trên da đầu). Để dầu xả ở trên tóc trong 2-3 phút để nó thấm sâu, giúp cấp ẩm và phục hồi tóc. Dầu xả có tác dụng giảm ma sát, giúp tóc mềm mượt hơn và dễ chải hơn.</p>
+
+                    <p><strong>Bước 4: Chải tóc từ từ</strong></p>
+                    <p>Sau khi gội xong, dùng lược hoặc cây chải tóc có răng cách xa để chải tóc từ từ từ trên xuống dưới. Chải từ từ giúp tránh tóc bị gãy, rụng do ma sát mạnh. Nếu tóc bị vướng, hãy chải từng bộ phận một, đừng cố chải toàn bộ cùng một lúc.</p>
+
+                    <p><strong>Bước 5: Sử dụng tinh dầu hoặc serum chăm sóc</strong></p>
+                    <p>Cuối cùng, thoa một ít tinh dầu hoặc serum chăm sóc lên tóc để tăng độ mềm mượt, tạo độ bóng và bảo vệ tóc khỏi tác động của môi trường. Tinh dầu cũng giúp làm thơm tóc và tạo cảm giác sảng khoái.</p>
+
+                    <p><strong>Mẹo thêm:</strong> Hãy gội tóc 2-3 lần/tuần, tránh gội quá thường xuyên vì có thể làm tóc khô. Vào mùa hè, bạn nên gội tóc sau khi tiếp xúc với chlorine hoặc nước biển. Ngủ đủ giấc, giảm stress và ăn uống đầy đủ dinh dưỡng cũng giúp tóc khỏe mạnh hơn.</p>
+
+                    <p><strong>Kết luận:</strong> Chăm sóc tóc hàng ngày không phức tạp, chỉ cần kiên trì thực hiện 5 bước này mỗi ngày và bạn sẽ thấy sự khác biệt rõ rệt. Hãy tới FORMAN định kỳ mỗi 3-4 tuần để cắt tóc và tư vấn chăm sóc tóc chuyên sâu từ các barber chuyên nghiệp!</p>
+
+                    <div class="blog-post-tags">
+                        <span class="tag">Chăm sóc</span>
+                        <span class="tag">Hàng ngày</span>
+                        <span class="tag">Mẹo</span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="carousel-section">
+                <div class="carousel-header">
+                    <h2 class="carousel-title">BÀI 2: CÁCH HẠN CHẾ TÓC HƯ TỔN</h2>
+                </div>
+            </section>
+
+            
+            <div class="blog-post">
+                <div class="blog-post-content">
+                    <h2 style="text-align: left; margin-bottom: 20px;">Cách hạn chế tóc hư tổn, gãy rụng</h2>
+                    <div class="blog-post-meta">
+                        <span>📅 14/04/2026</span>
+                        <span>⏱️ 10 phút đọc</span>
+                    </div>
+
+                    <p><strong>Giới thiệu:</strong></p>
+                    <p>Tóc hư tổn, gãy rụng là vấn đề thường gặp ở những anh chàng bận rộn. Nguyên nhân có thể đến từ lối sống không lành mạnh, chăm sóc tóc sai cách, tác động của thời tiết hay sử dụng các sản phẩm làm tóc không phù hợp. Bài viết này sẽ cung cấp cho bạn những giải pháp thực tế để hạn chế tóc hư tổn và phục hồi tóc khỏe mạnh trở lại.</p>
+
+                    <p><strong>1. Nguyên nhân chính khiến tóc hư tổn</strong></p>
+                    <p><em>Gội tóc quá nóng:</em> Nước nóng quá làm mở dịch bã nhằn trên tóc, khiến tóc mất đi lớp bảo vệ tự nhiên, dẫn đến tóc khô xơ và gãy.</p>
+                    <p><em>Chăm sóc sai cách:</em> Chải tóc mạnh khi tóc còn ướt, chà xát tóc với lực quá lớn hoặc sử dụng những dụng cụ chải tóc kém chất lượng.</p>
+                    <p><em>Dầu gội không phù hợp:</em> Sử dụng dầu gội chứa hóa chất độc hại hoặc không phù hợp với loại tóc của bạn.</p>
+                    <p><em>Tác động từ môi trường:</em> Nắng mạo, ô nhiễm, chlorine từ bể bơi, nước mặn từ biển là những tác nhân khiến tóc yếu và hư tổn.</p>
+                    <p><em>Lối sống không lành mạnh:</em> Thiếu ngủ, stress, dinh dưỡng kém có tác động tiêu cực đến sức khỏe tóc.</p>
+
+                    <p><strong>2. Cách phòng ngừa tóc hư tổn</strong></p>
+                    <p><strong>• Gội tóc với nước mới (ấm không nóng):</strong><br>
+                    Hãy thay đổi thói quen gội tóc bằng nước rất nóng. Nước ấm nhẹ (khoảng 35-38°C) sẽ vừa giúp làm sạch mà không làm tổn thương tóc. Hết mỗi lần gội, hãy rửa bằng nước lạnh cuối cùng để đóng ngọn tóc, tăng độ bóng.</p>
+                    
+                    <p><strong>• Chọn dầu gội chất lượng cao:</strong><br>
+                    Tìm các sản phẩm dầu gội có thành phần tự nhiên, không chứa sulfate (chất tẩy rửa mạnh). Các dầu gội chứa biotin, keratin hay collagen sẽ giúp mạnh hóa tóc từ bên trong.</p>
+                    
+                    <p><strong>• Sử dụng dầu xả đều đặn:</strong><br>
+                    Dầu xả là bước quan trọng giúp giữ ẩm cho tóc. Lấy một lượng vừa đủ và thoa từ giữa tóc đến ngọn, tránh thoa trên da đầu.</p>
+                    
+                    <p><strong>• Chải tóc đúng cách:</strong><br>
+                    - Chỉ chải tóc khi tóc đã khô hoặc gần khô<br>
+                    - Sử dụng lược hoặc cây chải có răng cách xa<br>
+                    - Chải từ từ từ trên xuống dưới<br>
+                    - Nếu có vướng, hãy chải bộ phận vướng trước, sau đó từ từ chải toàn bộ</p>
+
+                    <p><strong>3. Liệu pháp phục hồi tóc hư tổn</strong></p>
+                    <p><strong>• Cắt bỏ ngọn tóc xơ:</strong><br>
+                    Cắt tóc đều đặn mỗi 3-4 tuần không chỉ giúp tóc trông gọn gàng mà còn loại bỏ phần tóc hư tổn, xơ rão. Tại FORMAN, các barber chuyên nghiệp sẽ cắt bỏ chính xác phần tóc xơ mà không ảnh hưởng đến độ dài tóc bạn muốn giữ.</p>
+                    
+                    <p><strong>• 敷 mặt nạ tóc 1-2 lần/tuần:</strong><br>
+                    Sử dụng mặt nạ tóc hoặc kem ủ tóc có thành phần nuôi dưỡng (argon oil, macadamia oil, keratin). Thoa lên tóc, ủ trong 10-15 phút rồi gội sạch. Điều này giúp phục hồi tóc hư tổn một cách nhanh chóng.</p>
+                    
+                    <p><strong>• Massage da đầu:</strong><br>
+                    Massage da đầu 5-10 phút mỗi ngày giúp kích thích lưu thông máu, cấp dưỡng cho tóc từ bên trong. Điều này giúp tóc mọc khỏe hơn và giảm tình trạng rụng tóc.</p>
+
+                    <p><strong>4. Thay đổi lối sống để tóc khỏe hơn</strong></p>
+                    <p><strong>• Dinh dưỡng cân bằng:</strong> Ăn nhiều thực phẩm giàu protein (cá, gà, trứng), vitamin B (lúa mạch, khoai lang), sắt (thịt đỏ, rau xanh) và zink (hạnh nhân, hạt bí). Những chất này rất quan trọng để tóc mọc khỏe.</p>
+                    
+                    <p><strong>• Ngủ đủ giấc:</strong> Khi ngủ, cơ thể sản sinh hormone tăng trưởng giúp tóc mọc mạnh. Hãy cố gắng ngủ 7-8 tiếng mỗi đêm.</p>
+                    
+                    <p><strong>• Giảm căng thẳng:</strong> Stress kéo dài có thể gây rụng tóc. Hãy tìm những cách thư giãn như tập thể dục, yoga, thiền định hay đơn giản là tận hưởng thời gian ở FORMAN với dịch vụ làm đẹp cho nam giới.</p>
+                    
+                    <p><strong>• Bảo vệ tóc khỏi thời tiết:</strong> Đội mũ khi ra ngoài nắng mạo, rửa sạch tóc sau khi bơi ở bể bơi hoặc biển để loại bỏ chlorine và muối.</p>
+
+                    <p><strong>5. Các sản phẩm nên sử dụng</strong></p>
+                    <p>• Dầu gội keratin hoặc collagen<br>
+                    • Dầu xả nuôi dưỡng<br>
+                    • Tinh dầu argan hoặc macadamia<br>
+                    • Serum chăm sóc tóc<br>
+                    • Mặt nạ tóc phục hồi (1-2 lần/tuần)</p>
+
+                    <p><strong>Kết luận:</strong> Hạn chế tóc hư tổn không phải là đâu khó, chỉ cần bạn kiên trì thực hiện các bước chăm sóc đúng cách và thay đổi một số thói quen hàng ngày. Đừng quên ghé FORMAN định kỳ mỗi 3-4 tuần để được cắt tóc chuyên nghiệp và nhận tư vấn chăm sóc tóc từ các barber giàu kinh nghiệm. Với sự kết hợp giữa chăm sóc tại nhà và dịch vụ chuyên nghiệp, mái tóc của bạn sẽ luôn khỏe mạnh, bóng mượt và thu hút!</p>
+
+                    <div class="blog-post-tags">
+                        <span class="tag">Hư tổn</span>
+                        <span class="tag">Khắc phục</span>
+                        <span class="tag">Tóc gãy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="backToTop" class="back-to-top" title="Quay lên đầu trang">↑</button>
+    <a href="tel:1900272703" class="call-button" title="Gọi điện">☎</a>
+
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-column">
+                <div class="footer-title">Về chúng tôi</div>
+                <ul class="footer-list">
+                    <li><a href="https://datlichlamtoc.id.vn/about.html">Giới thiệu về FORMAN</a></li>
+                    <li><a href="https://datlichlamtoc.id.vn/blog.html">Blog chăm sóc tóc</a></li>
+                </ul>
+            </div>
+
+
+            <div class="footer-column">
+                <div class="footer-title">Liên hệ</div>
+                <ul class="footer-list">
+                    <li class="contact-info">
+                        <span class="label">Hotline:</span>
+                        <a href="tel:1900272703">1900.27.27.03</a>
+                    </li>
+                    <li class="contact-info">
+                        <span class="label">Email:</span>
+                        <a href="mailto:formanvn@gmail.com">formanvn@gmail.com</a>
+                    </li>
+                    <li class="contact-info">
+                        <span class="label">Địa chỉ:</span>
+                        <span>123 Đường ABC, Quận XYZ, TP. HCM</span>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="footer-column">
+                <div class="footer-title">Thông tin</div>
+                <ul class="footer-list">
+                    <li class="contact-info">
+                        <span class="label">Giờ phục vụ:</span>
+                        <span>Thứ 2 - Chủ Nhật, 8h30 - 20h30</span>
+                    </li>
+                    <li><a href="https://datlichlamtoc.id.vn/privacy-policy.html">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+
+
+
+            <div class="footer-column">
+                <div class="payment-section">
+                    <p class="payment-title">Hình thức thanh toán</p>
+                    <div class="payment-icons">
+                        <img src="image/money.png" alt="Tiền mặt" class="payment-icon">
+                        <img src="image/qr.jpg" alt="Chuyển khoản" class="payment-icon">
+                        <img src="image/apple_pay.jpg" alt="Apple Pay" class="payment-icon">
+                        <img src="image/visa.jpg" alt="Visa" class="payment-icon">
+                        <img src="image/mastercard.jpg" alt="Mastercard" class="payment-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+    </footer>
+
+    <script>
+        // Xử lý tìm kiếm dịch vụ
+        const searchInput = document.querySelector('.search-bar input');
+        const searchBtn = document.querySelector('.search-bar button');
+
+        function performSearch() {
+            const query = searchInput.value.trim();
+            if (query) {
+                // Redirect đến trang dịch vụ với query search
+                window.location.href = 'https://forman-omega.vercel.app/service.html?q=' + encodeURIComponent(query);
+            }
+        }
+
+        if (searchBtn) {
+            searchBtn.addEventListener('click', performSearch);
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        }
+    </script>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

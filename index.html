@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORMAN-Cắt tóc nam</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div class="nav-bar_left">
+            <div class="nav-bar_logo">FORMAN</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm dịch vụ...">
+            <button title="Tìm kiếm">🔍</button>
+        </div>
+        <div class="nav-bar_right">
+            <button class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-bar_menu" id="navMenu">
+                <a href="https://datlichlamtoc.id.vn/index.html#">Trang chủ</a>
+                <a href="https://forman-omega.vercel.app/service.html">Dịch vụ</a>
+                <a href="https://giaodiendatlich.vercel.app/index.html">Khuyến mãi</a>
+                <a href="https://datlichlamtoc.id.vn/about.html">Về chúng tôi</a>
+                <div class="form_button">
+                    <a href="https://tranthitrucly.io.vn/loginuser" class="btn-action nav-login-btn">Đăng nhập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slider">
+        <img src="image/b1.jpg">
+        <img src="image/b2.jpg">
+        <img src="image/b4.jpg">
+
+    </div>
+    <div class="home_form">
+
+        <div class="content-center">
+            <h2>Đặt lịch cắt tóc nam dễ dàng với FORMAN</h2>
+        </div>
+
+        <div class="slogan">
+            <p>Nhanh chóng - tiện lợi - chuyên nghiệp</p>
+        </div>
+
+        <div class="form_input">
+            <input type="text" id="phoneInput" placeholder="Vui lòng nhập số điện thoại của bạn">
+            <div class="form_button">
+                <button class="btn-action" id="bookingBtn">Đặt lịch ngay</button>
+            </div>
+        </div>
+        <p id="bookingMessage" class="booking-message"></p>
+    </div>
+
+    <section class="carousel-section">
+        <div class="carousel-header">
+            <h2 class="carousel-title">DỊCH VỤ NỔI BẬT</h2>
+            <a href="https://forman-omega.vercel.app/service.html" class="view-more">Xem tất cả ></a>
+        </div>
+
+        <div class="carousel-container">
+            <button class="carousel-btn carousel-btn-prev" id="carouselPrev">
+                <span>❮</span>
+            </button>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+
+                </div>
+            </div>
+
+            <button class="carousel-btn carousel-btn-next" id="carouselNext">
+                <span>❯</span>
+            </button>
+        </div>
+    </section>
+
+
+    <section class="carousel-section">
+        <div class="carousel-header">
+            <h2 class="carousel-title">KHUYẾN MÃI HOT</h2>
+            <a href="https://giaodiendatlich.vercel.app/index.html" class="view-more">Xem tất cả ></a>
+        </div>
+
+        <div class="carousel-container">
+            <button class="carousel-btn carousel-btn-prev" id="promotionPrev">
+                <span>❮</span>
+            </button>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="promotionTrack">
+
+                </div>
+            </div>
+
+            <button class="carousel-btn carousel-btn-next" id="promotionNext">
+                <span>❯</span>
+            </button>
+        </div>
+    </section>
+
+
+    <button id="backToTop" class="back-to-top" title="Quay lên đầu trang">↑</button>
+    <a href="tel:1900272703" class="call-button" title="Gọi điện">☎</a>
+
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-column">
+                <div class="footer-title">Về chúng tôi</div>
+                <ul class="footer-list">
+                    <li><a href="https://datlichlamtoc.id.vn/about.html">Giới thiệu về FORMAN</a></li>
+                    <li><a href="https://datlichlamtoc.id.vn/blog.html">Blog chăm sóc tóc</a></li>
+                </ul>
+            </div>
+
+
+            <div class="footer-column">
+                <div class="footer-title">Liên hệ</div>
+                <ul class="footer-list">
+                    <li class="contact-info">
+                        <span class="label">Hotline:</span>
+                        <a href="tel:1900272703">1900.27.27.03</a>
+                    </li>
+                    <li class="contact-info">
+                        <span class="label">Email:</span>
+                        <a href="mailto:formanvn@gmail.com">formanvn@gmail.com</a>
+                    </li>
+                    <li class="contact-info">
+                        <span class="label">Địa chỉ:</span>
+                        <span>123 Đường ABC, Quận XYZ, TP. HCM</span>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="footer-column">
+                <div class="footer-title">Thông tin</div>
+                <ul class="footer-list">
+                    <li class="contact-info">
+                        <span class="label">Giờ phục vụ:</span>
+                        <span>Thứ 2 - Chủ Nhật, 8h30 - 20h30</span>
+                    </li>
+                    <li><a href="https://datlichlamtoc.id.vn/privacy-policy.html">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+
+
+
+            <div class="footer-column">
+                <div class="payment-section">
+                    <p class="payment-title">Hình thức thanh toán</p>
+                    <div class="payment-icons">
+                        <img src="image/money.png" alt="Tiền mặt" class="payment-icon">
+                        <img src="image/qr.jpg" alt="Chuyển khoản" class="payment-icon">
+                        <img src="image/apple_pay.jpg" alt="Apple Pay" class="payment-icon">
+                        <img src="image/visa.jpg" alt="Visa" class="payment-icon">
+                        <img src="image/mastercard.jpg" alt="Mastercard" class="payment-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

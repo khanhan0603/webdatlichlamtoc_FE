@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cá nhân - FORMAN</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .profile-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-header h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        .profile-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group input:disabled,
+        .form-group textarea:disabled {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: #1557b0;
+        }
+
+        .btn-secondary {
+            background-color: #e8e8e8;
+            color: #333;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #d0d0d0;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            display: block;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            display: block;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1a73e8;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div class="nav-bar_left">
+            <div class="nav-bar_logo">FORMAN</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm dịch vụ...">
+            <button title="Tìm kiếm">🔍</button>
+        </div>
+        <div class="nav-bar_right">
+            <button class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-bar_menu" id="navMenu">
+                <a href="index.html">Trang chủ</a>
+                <a href="https://forman-omega.vercel.app/service.html">Dịch vụ</a>
+                <a href="https://giaodiendatlich.vercel.app/index.html">Khuyến mãi</a>
+                <a href="about.html">Về chúng tôi</a>
+                <div class="form_button" id="loginContainer">
+                    <a href="https://tranthitrucly.io.vn/loginuser" class="btn-action nav-login-btn">Đăng nhập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h2>Thông tin cá nhân</h2>
+        </div>
+
+        <div id="profileMessage" class="message"></div>
+
+        <div id="loadingSpinner" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Đang tải thông tin...</p>
+        </div>
+
+        <form id="profileForm" class="profile-form">
+            <div class="form-group">
+                <label for="userId">ID (không thể chỉnh sửa)</label>
+                <input type="text" id="userId" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="userPhone">Số điện thoại</label>
+                <input type="tel" id="userPhone" placeholder="Nhập số điện thoại">
+            </div>
+
+            <div class="form-group">
+                <label for="userName">Họ và tên</label>
+                <input type="text" id="userName" placeholder="Nhập họ và tên">
+            </div>
+
+            <div class="form-group">
+                <label for="userEmail">Email</label>
+                <input type="email" id="userEmail" placeholder="Nhập email">
+            </div>
+
+            <div class="form-group">
+                <label for="userAddress">Địa chỉ</label>
+                <input type="text" id="userAddress" placeholder="Nhập địa chỉ">
+            </div>
+
+            <div class="form-group">
+                <label for="userNote">Ghi chú</label>
+                <textarea id="userNote" placeholder="Thêm ghi chú..."></textarea>
+            </div>
+
+            <div class="button-group">
+                <a href="https://datlichlamtoc.id.vn/orders.html" class="btn btn-secondary">Xem lịch sử đặt lịch</a>
+                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            </div>
+        </form>
+    </div>
+
+    <button id="backToTop" class="back-to-top" title="Quay lên đầu trang">↑</button>
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-column">
+                <div class="footer-title">Về chúng tôi</div>
+                <ul class="footer-list">
+                    <li><a href="https://datlichlamtoc.id.vn/about.html">Giới thiệu về FORMAN</a></li>
+                    <li><a href="https://datlichlamtoc.id.vn/blog.html">Blog chăm sóc tóc</a></li>
+                </ul>
+            </div>
+
+
+            <div class="footer-column">
+                <div class="footer-title">Liên hệ</div>
+                <ul class="footer-list">
+                    <li class="contact-info">
+                        <span class="label">Hotline:</span>
+                        <a href="tel:1900272703">1900.27.27.03</a>
+                    </li>
+                    <li class="contact-info">
+                        <span class="label">Email:</span>
+                        <a href="mailto:formanvn@gmail.com">formanvn@gmail.com</a>
+                    </li>
+                    <li class="contact-info">
+                        <span class="label">Địa chỉ:</span>
+                        <span>123 Đường ABC, Quận XYZ, TP. HCM</span>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="footer-column">
+                <div class="footer-title">Thông tin</div>
+                <ul class="footer-list">
+                    <li class="contact-info">
+                        <span class="label">Giờ phục vụ:</span>
+                        <span>Thứ 2 - Chủ Nhật, 8h30 - 20h30</span>
+                    </li>
+                    <li><a href="https://datlichlamtoc.id.vn/privacy-policy.html">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+
+
+
+            <div class="footer-column">
+                <div class="payment-section">
+                    <p class="payment-title">Hình thức thanh toán</p>
+                    <div class="payment-icons">
+                        <img src="image/money.png" alt="Tiền mặt" class="payment-icon">
+                        <img src="image/qr.jpg" alt="Chuyển khoản" class="payment-icon">
+                        <img src="image/apple_pay.jpg" alt="Apple Pay" class="payment-icon">
+                        <img src="image/visa.jpg" alt="Visa" class="payment-icon">
+                        <img src="image/mastercard.jpg" alt="Mastercard" class="payment-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+    </footer>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            initAuthUI();
+            loadProfileData();
+        });
+
+        async function loadProfileData() {
+            const token = getStoredToken();
+            const user = getStoredUser();
+
+            if (!token || !user) {
+                showProfileMessage('Vui lòng đăng nhập để xem thông tin cá nhân', 'error');
+                setTimeout(() => {
+                    window.location.href = 'https://tranthitrucly.io.vn/loginuser';
+                }, 2000);
+                return;
+            }
+
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            loadingSpinner.style.display = 'block';
+
+            try {
+                const userId = user.id || user.userId;
+                const freshUser = await fetchUserInfo(userId, token);
+
+                if (freshUser) {
+                    populateProfileForm(freshUser);
+                    localStorage.setItem('user_info', JSON.stringify(freshUser));
+                } else {
+                    populateProfileForm(user);
+                }
+            } catch (error) {
+                console.error('Lỗi tải thông tin cá nhân:', error);
+                showProfileMessage('Không thể tải thông tin cá nhân. Vui lòng thử lại.', 'error');
+                populateProfileForm(user);
+            } finally {
+                loadingSpinner.style.display = 'none';
+            }
+        }
+
+        function populateProfileForm(user) {
+            document.getElementById('userId').value = user.id || user.userId || '';
+            document.getElementById('userPhone').value = user.sodienthoai || user.phone || '';
+            document.getElementById('userName').value = user.hoten || user.name || user.fullname || '';
+            document.getElementById('userEmail').value = user.email || '';
+            document.getElementById('userAddress').value = user.diachi || user.address || '';
+            document.getElementById('userNote').value = user.ghichu || user.note || '';
+        }
+
+        document.getElementById('profileForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const token = getStoredToken();
+            const user = getStoredUser();
+
+            if (!token || !user) {
+                showProfileMessage('Vui lòng đăng nhập để cập nhật thông tin', 'error');
+                return;
+            }
+
+            const userId = user.id || user.userId;
+
+            const updatedUser = {
+                id: userId,
+                sodienthoai: document.getElementById('userPhone').value,
+                hoten: document.getElementById('userName').value,
+                email: document.getElementById('userEmail').value,
+                diachi: document.getElementById('userAddress').value,
+                ghichu: document.getElementById('userNote').value,
+            };
+
+            try {
+                const submitBtn = document.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Đang lưu...';
+
+                const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedUser),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                const updatedData = data.data || data;
+
+                localStorage.setItem('user_info', JSON.stringify(updatedData));
+                showProfileMessage('Cập nhật thông tin thành công!', 'success');
+
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
+            } catch (error) {
+                console.error('Lỗi cập nhật thông tin:', error);
+                showProfileMessage('Không thể cập nhật thông tin. Vui lòng thử lại.', 'error');
+            } finally {
+                const submitBtn = document.querySelector('button[type="submit"]');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Lưu thay đổi';
+            }
+        });
+
+        function showProfileMessage(message, type = 'success') {
+            const messageEl = document.getElementById('profileMessage');
+            messageEl.textContent = message;
+            messageEl.className = `message ${type}`;
+        }
+    </script>
+</body>
+
+</html>
