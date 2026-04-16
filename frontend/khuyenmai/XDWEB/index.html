@@ -825,66 +825,72 @@ transition: background 0.15s ease;
     </footer>
 
   <script>
-    const apiResponse = {
-      "status": true,
-      "data": [
-        { "tenkhuyenmai": "Săn sale 5/4", "thoigian_apdung": "2026-04-05 00:00:00", "thoigian_ketthuc": "2026-04-06 00:00:00", "giatri": 3 },
-        { "tenkhuyenmai": "Săn sale 4/4", "thoigian_apdung": "2026-04-04 00:00:00", "thoigian_ketthuc": "2026-04-05 00:00:00", "giatri": 2.5 },
-        { "tenkhuyenmai": "Khách hàng thành viên", "thoigian_apdung": "2026-04-30 00:00:00", "thoigian_ketthuc": "2026-05-01 00:00:00", "giatri": 5 }
-      ]
-    };
+  async function fetchPromos() {
+  try {
+    const res = await fetch("https://webdatlichlamtoc.id.vn/api/khuyen-mais");
+    const result = await res.json();
 
-    function formatDate(datetime) {
-      const date = new Date(datetime);
-      return `${date.getDate().toString().padStart(2,'0')}/${(date.getMonth()+1).toString().padStart(2,'0')}/${date.getFullYear()}`;
-    }
+    if (!result.status) throw new Error("API lỗi");
 
-    function renderPromos() {
-      const container = document.getElementById('promoGrid');
-      container.innerHTML = '';
+    renderPromos(result.data);
 
-      apiResponse.data.forEach(promo => {
-        const cardHTML = `
-          <div class="promo-card">
-            <div class="card-title">${promo.tenkhuyenmai}</div>
-            <div class="card-body">
-              <p class="promo-desc">Ưu đãi đặc biệt dành cho khách hàng FORMAN</p>
-              
-              <div class="date-container">
-                <div class="date-row">
-                  <span class="date-label">BẮT ĐẦU</span>
-                  <span class="date-value">${formatDate(promo.thoigian_apdung)}</span>
-                </div>
-                <div class="date-row">
-                  <span class="date-label">KẾT THÚC</span>
-                  <span class="date-value">${formatDate(promo.thoigian_ketthuc)}</span>
-                </div>
-              </div>
+  } catch (err) {
+    console.error(err);
+    document.getElementById('promoGrid').innerHTML = "<p>Lỗi tải dữ liệu</p>";
+  }
+}
+function formatDate(datetime) {
+  const date = new Date(datetime);
+  return `${date.getDate().toString().padStart(2,'0')}/${
+    (date.getMonth()+1).toString().padStart(2,'0')
+  }/${date.getFullYear()}`;
+}
 
-              <button class="btn-book" onclick="claimPromo('${promo.tenkhuyenmai}', ${promo.giatri})">
-                ĐẶT LỊCH NGAY
-              </button>
+function renderPromos(data) {
+  const container = document.getElementById('promoGrid');
+  container.innerHTML = '';
+
+  const now = new Date();
+
+  data.forEach(promo => {
+
+    if (new Date(promo.thoigian_ketthuc) < now) return;
+
+    const value = promo.loai === "PERCENT"
+      ? promo.giatri + "%"
+      : promo.giatri.toLocaleString("vi-VN") + "đ";
+
+    const cardHTML = `
+      <div class="promo-card">
+        <div class="card-title">${promo.tenkhuyenmai}</div>
+        <div class="card-body">
+          <p class="promo-desc">Giảm ${value} cho dịch vụ</p>
+          
+          <div class="date-container">
+            <div class="date-row">
+              <span class="date-label">BẮT ĐẦU</span>
+              <span class="date-value">${formatDate(promo.thoigian_apdung)}</span>
+            </div>
+            <div class="date-row">
+              <span class="date-label">KẾT THÚC</span>
+              <span class="date-value">${formatDate(promo.thoigian_ketthuc)}</span>
             </div>
           </div>
-        `;
-        container.innerHTML += cardHTML;
-      });
-    }
 
-  function claimPromo(name, value) {
-  window.location.href = "https://tranthitrucly.io.vn/datlich";
+          <button class="btn-book" onclick="claimPromo('${promo.id}')">
+            ĐẶT LỊCH NGAY
+          </button>
+        </div>
+      </div>
+    `;
+
+    container.innerHTML += cardHTML;
+  });
 }
-    function bookAppointment() {
-      const phone = document.getElementById('phone').value.trim();
-      if (phone) {
-        alert(`Cảm ơn bạn! Chúng tôi sẽ liên hệ qua số ${phone} để xác nhận lịch cắt tóc.`);
-      } else {
-        alert("Vui lòng nhập số điện thoại!");
-      }
-    }
 
-    window.onload = renderPromos;
+window.onload = fetchPromos;
 
+ 
   </script>
   <div style="
 position: fixed;
