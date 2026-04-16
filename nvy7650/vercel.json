@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/service.html" },
+    { "source": "/:path*", "destination": "/:path*" }
+  ]
+}
