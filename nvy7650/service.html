@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dịch vụ - FORMAN Cắt tóc nam</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Nav Bar -->
+    <div class="nav-bar">
+        <div class="nav-bar_left">
+            <div class="nav-bar_logo">FORMAN</div>
+        </div>
+        <div class="nav-bar_right">
+            <button class="hamburger-menu" id="hamburgerMenu">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-bar_menu" id="navMenu">
+                <a href="https://datlichlamtoc.id.vn/index.html">Trang chủ</a>
+                <a href="#" class="active">Dịch vụ</a>
+                <a href="https://giaodiendatlich.vercel.app/">Khuyến mãi</a>
+                <a href="https://datlichlamtoc.id.vn/about.html">Về chúng tôi</a>
+                <a href="https://tranthitrucly.io.vn/loginuser" class="btn-action">Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1>Dịch vụ của FORMAN</h1>
+        <p>Chuyên cắt tóc nam - Uốn - Nhuộm - Chăm sóc tóc cao cấp</p>
+    </div>
+
+    <!-- Bộ lọc -->
+    <div class="filter-section">
+        <div class="filter-container" id="filterContainer"></div>
+    </div>
+
+    <section class="services-section">
+        <div class="services-grid" id="servicesGrid">
+            <div id="loading">Đang tải dịch vụ...</div>
+        </div>
+    </section>
+
+    <button id="backToTop" class="back-to-top">↑</button>
+    <a href="tel:1900272703" class="call-button">☎</a>
+
+    <script>
+        const API_BASE_URL = "https://webdatlichlamtoc.id.vn";
+        let allServices = [];
+        let allCategories = [];
+        let currentFilter = 'all';
+
+        async function loadCategories() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/types`);
+                const result = await res.json();
+                if (result.status && result.data) {
+                    allCategories = [
+                        { id: 'all', tenloai: 'Tất cả dịch vụ' },
+                        ...result.data
+                    ];
+                }
+            } catch (e) {
+                console.error("Lỗi khi lấy loại dịch vụ:", e);
+                allCategories = [{ id: 'all', tenloai: 'Tất cả dịch vụ' }];
+            }
+        }
+
+        async function getPhuongTien(id_dich_vu) {
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/phuong-tiens/${id_dich_vu}`);
+                if (!res.ok) return [];
+                const data = await res.json();
+                return Array.isArray(data) ? data : (data.data || []);
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function createFilterButtons() {
+            const container = document.getElementById('filterContainer');
+            container.innerHTML = '';
+
+            allCategories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = `filter-btn ${cat.id === currentFilter ? 'active' : ''}`;
+                btn.textContent = cat.tenloai;
+                btn.addEventListener('click', () => filterServices(cat.id));
+                container.appendChild(btn);
+            });
+        }
+
+        function filterServices(categoryId) {
+            currentFilter = categoryId;
+            createFilterButtons();
+
+            const filteredServices = categoryId === 'all' 
+                ? allServices 
+                : allServices.filter(service => service.id_loaidichvu === categoryId);
+
+            renderServices(filteredServices);
+        }
+
+        async function loadServices() {
+            const loadingEl = document.getElementById('loading');
+            const grid = document.getElementById('servicesGrid');
+
+            try {
+                await loadCategories();
+
+                const res = await fetch(`${API_BASE_URL}/api/services`);
+                const result = await res.json();
+
+                loadingEl.style.display = 'none';
+
+                if (!result.status || !result.data) {
+                    grid.innerHTML = `<p style="color:red; text-align:center; padding:40px;">Không tải được dữ liệu dịch vụ.</p>`;
+                    return;
+                }
+
+                allServices = result.data;
+                createFilterButtons();
+                renderServices(allServices);
+
+            } catch (err) {
+                loadingEl.innerHTML = `<span style="color:red;">Không kết nối được với server. Vui lòng thử lại sau.</span>`;
+            }
+        }
+
+        async function renderServices(services) {
+            const grid = document.getElementById('servicesGrid');
+            grid.innerHTML = '';
+
+            if (services.length === 0) {
+                grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:60px; color:#666;">Không tìm thấy dịch vụ nào thuộc loại này.</p>`;
+                return;
+            }
+
+            for (const service of services) {
+                const phuongtiens = await getPhuongTien(service.id);
+
+                let mediaHTML = `<img src="image/b1.jpg" alt="${service.tendichvu}" class="service-image">`;
+
+                if (phuongtiens.length > 0) {
+                    phuongtiens.sort((a, b) => (a.thutu || 999) - (b.thutu || 999));
+                    const first = phuongtiens[0];
+                    if (first.link) {
+                        if (first.loai === "VIDEO") {
+                            mediaHTML = `<video src="${first.link}" controls muted class="service-image"></video>`;
+                        } else {
+                            mediaHTML = `<img src="${first.link}" alt="${service.tendichvu}" class="service-image">`;
+                        }
+                    }
+                }
+
+                const html = `
+                    <div class="service-card">
+                        ${mediaHTML}
+                        <div class="service-info">
+                            <h3>${service.tendichvu}</h3>
+                            <p class="service-desc">${service.mota || 'Đang cập nhật mô tả...'}</p>
+                            <p class="service-price">${Number(service.dongia || 0).toLocaleString('vi-VN')} VND</p>
+                            
+                            <div class="button-group">
+                                <a href="https://tranthitrucly.io.vn/datlich" 
+                                   class="btn-action btn-datlich">Đặt lịch ngay</a>
+                                <a href="https://forman-detail-services.vercel.app/?id=${service.id}" 
+                                   class="btn-action btn-chitiet">Chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                grid.insertAdjacentHTML('beforeend', html);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadServices();
+
+            const ham = document.getElementById('hamburgerMenu');
+            const menu = document.getElementById('navMenu');
+            ham.addEventListener('click', () => {
+                menu.classList.toggle('show');
+                ham.classList.toggle('active');
+            });
+
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                backToTop.classList.toggle('show', window.scrollY > 500);
+            });
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-title">Về chúng tôi</div>
+                <ul class="footer-list">
+                    <li><a href="https://datlichlamtoc.id.vn/about.html">Giới thiệu về FORMAN</a></li>
+                    <li><a href="#">Tin tức</a></li>
+                    <li><a href="#">Tìm FORMAN gần nhất</a></li>
+                    <li><a href="#">Blog chăm sóc tóc</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <div class="footer-title">Liên hệ</div>
+                <ul class="footer-list">
+                    <li class="contact-info">
+                        <span class="label">Hotline:</span>
+                        <a href="tel:1900272703">1900.27.27.03</a>
+                    </li>
+                    <li class="contact-info">
+                        <span class="label">Email:</span>
+                        <a href="mailto:formanvn@gmail.com">formanvn@gmail.com</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <div class="footer-title">Thông tin</div>
+                <ul class="footer-list">
+                    <li class="contact-info">
+                        <span class="label">Giờ phục vụ:</span>
+                        <span>Thứ 2 - Chủ Nhật, 8h30 - 20h30</span>
+                    </li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Điều kiện giao dịch chung</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <div class="payment-section">
+                    <p class="payment-title">Hình thức thanh toán</p>
+                    <div class="payment-icons">
+                        <img src="image/money.png" alt="Tiền mặt" class="payment-icon">
+                        <img src="image/qr.jpg" alt="Chuyển khoản" class="payment-icon">
+                        <img src="image/apple_pay.jpg" alt="Apple Pay" class="payment-icon">
+                        <img src="image/visa.jpg" alt="Visa" class="payment-icon">
+                        <img src="image/mastercard.jpg" alt="Mastercard" class="payment-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
