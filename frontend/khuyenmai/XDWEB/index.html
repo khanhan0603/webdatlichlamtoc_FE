@@ -7,73 +7,275 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #f8f9fa;
-      color: #333;
-    }
-
-    /* ==================== HEADER ==================== */
-/* ===== HEADER FIX CHUẨN ===== */
-header {
-  background: #ffffff;
-  padding: 10px 0;
+    
+/* Reset cơ bản */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
-.top-nav {
-  max-width: 1300px;
-  margin: auto;
-  padding: 14px 30px;
+header {
+  width: 100%;
+  background: #f5f5f5;
+  padding: 15px 40px;
+}
+
+/* Navbar */
+.nav-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f2f2f2;
-  border-radius: 16px;
 }
 
-/* logo */
-.logo {
-  font-size: 36px;
+/* Logo */
+.nav-bar_logo {
+  font-size: 32px;
   font-weight: 900;
   color: #000;
 }
 
-/* menu + login chung 1 hàng */
-.nav-right {
+.nav-bar_menu {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 25px;
 }
 
-/* menu */
-.nav-links {
-  display: flex;
-  gap: 40px;
-}
-
-.nav-links a {
+.nav-bar_menu a {
   text-decoration: none;
   color: #333;
-  font-size: 18px;
   font-weight: 500;
+  transition: 0.3s;
 }
 
-.nav-links a:hover {
+.nav-bar_menu a:hover {
   color: #00bcd4;
 }
 
-/* nút login */
-.btn-login {
-  background: #17a2b8;
+/* Login button */
+.nav-login-btn {
+  background: #00bcd4;
   color: white;
-  padding: 12px 28px;
-  border-radius: 14px;
-  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: bold;
   text-decoration: none;
-  display: inline-block;
+  transition: 0.3s;
 }
 
+.nav-login-btn:hover {
+  background: #0097a7;
+}
+
+/* Right section */
+.nav-bar_right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+/* ==================== SEARCH BAR ==================== */
+.search-bar {
+    position: relative;
+}
+
+
+.search-dropdown {
+    display: none;              
+    position: absolute;        
+    top: calc(100% + 6px);     
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 9999;              
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 6px 0;
+}
+
+
+.search-dropdown.show {
+    display: block;
+}
+
+
+.search-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    gap: 10px;
+}
+
+.search-result-item:hover {
+    background: #f0f8ff;
+}
+
+
+.search-result-name {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    flex: 1;
+}
+
+
+.search-result-price {
+    font-size: 13px;
+    color: #00bcd4;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+.search-loading {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+}
+
+
+.search-no-result {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #aaa;
+    text-align: center;
+}
+
+.user-menu-wrapper {
+    position: relative;
+}
+
+.user-avatar-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 7px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+}
+
+.user-avatar-btn:hover {
+    background: #cc0000;
+}
+
+.user-avatar-btn .avatar-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: white;
+    color: #ff0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.user-avatar-btn .chevron {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+}
+
+.user-avatar-btn.open .chevron {
+    transform: rotate(180deg);
+}
+
+.user-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    min-width: 210px;
+    z-index: 1000;
+    overflow: hidden;
+    animation: dropdownFade 0.2s ease;
+}
+
+@keyframes dropdownFade {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.user-dropdown.show {
+    display: block;
+}
+
+.user-dropdown-header {
+    padding: 14px 16px;
+    background: #fff5f5;
+    border-bottom: 1px solid #ffe0e0;
+}
+
+.user-dropdown-header .user-fullname {
+    font-weight: 700;
+    font-size: 14px;
+    color: #333;
+}
+
+.user-dropdown-header .user-phone {
+    font-size: 12px;
+    color: #888;
+    margin-top: 2px;
+}
+
+.user-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+transition: background 0.15s ease;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+}
+
+.user-dropdown-item:hover {
+    background: #fff5f5;
+    color: #ff0000;
+}
+
+.user-dropdown-item .item-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+.user-dropdown-divider {
+    height: 1px;
+    background: #f0f0f0;
+    margin: 4px 0;
+}
+
+.user-dropdown-item.logout-item {
+    color: #cc0000;
+}
+
+.user-dropdown-item.logout-item:hover {
+    background: #fff0f0;
+}
     /* ==================== HERO & BOOKING (GỮI NGUYÊN) ==================== */
     .hero { background: #111; color: white; padding: 40px 20px 60px; text-align: center; }
     .hair-images { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
@@ -235,58 +437,307 @@ header {
       background: linear-gradient(90deg, #ffcc00, #ffd700);
     }
 
-    footer {
-  background: #020b2c;
-  color: #fff;
-  padding: 70px 30px;
+    
+.footer {
+    background: #0a0e27;
+    color: white;
+    padding: 60px 20px 40px;
+    margin-top: 80px;
+    border-top: 3px solid #00bcd4;
 }
 
-.footer-content {
-  max-width: 1300px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 50px;
+.footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+    margin-bottom: 50px;
 }
 
-.footer-column h3 {
-  border-bottom: 2px solid #00d4ff;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
+.footer-column {
+    display: flex;
+    flex-direction: column;
 }
 
-.footer-column a {
-  color: #ccc;
+.footer-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #00bcd4;
+    padding-bottom: 12px;
 }
 
-.footer-column a:hover {
-  color: #00d4ff;
+.footer-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
-.payment-methods img {
-  background: white;
-  padding: 8px;
-  border-radius: 8px;
-  margin: 5px;
-  height: 40px;
+.footer-list li {
+    font-size: 14px;
+    line-height: 1.6;
 }
+
+.footer-list a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.footer-list a:hover {
+    color: #00bcd4;
+    transform: translateX(3px);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.contact-info .label {
+    font-weight: 600;
+    color: #00bcd4;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.contact-info a {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.contact-info span {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.payment-section {
+    background: rgba(0, 188, 212, 0.08);
+    padding: 20px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 188, 212, 0.3);
+}
+
+.payment-title {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.payment-icons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.payment-icon {
+    width: 40px;
+    height: 40px;
+    background: white;
+    padding: 4px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: contain;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.payment-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 25px;
+    border-top: 1px solid rgba(0, 188, 212, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.footer-bottom p {
+    margin: 0;
+    line-height: 1.8;
+}
+@media (max-width: 1200px) {
+    .footer-container {
+        gap: 50px;
+    }
+
+    .footer-title {
+        font-size: 14px;
+    }
+
+    .footer-list a {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 45px;
+    }
+
+    .footer {
+        padding: 50px 20px 35px;
+    }
+
+    .payment-section {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .footer {
+        padding: 40px 15px 30px;
+        margin-top: 60px;
+    }
+
+    .footer-title {
+        font-size: 13px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .footer-list {
+        gap: 12px;
+    }
+
+    .footer-list a {
+        font-size: 13px;
+    }
+
+    .payment-section {
+        max-width: 100%;
+    }
+
+    .payment-icons {
+        gap: 8px;
+    }
+
+    .payment-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .footer-bottom {
+        font-size: 12px;
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+    .footer {
+        padding: 30px 12px 20px;
+        margin-top: 40px;
+    }
+
+    .footer-title {
+        font-size: 12px;
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+    }
+
+    .footer-list {
+        gap: 10px;
+    }
+
+    .footer-list a {
+        font-size: 12px;
+    }
+
+    .footer-list li {
+        font-size: 12px;
+    }
+
+    .contact-info .label {
+        font-size: 11px;
+    }
+
+    .contact-info span {
+        font-size: 13px;
+    }
+
+    .payment-title {
+        font-size: 12px;
+    }
+
+    .payment-icons {
+        gap: 6px;
+    }
+
+    .payment-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .footer-bottom {
+        font-size: 11px;
+        padding-top: 15px;
+    }
+}
+
   </style>
 </head>
 <body>
 
   <!-- HEADER -->
   <header>
-    <div class="top-nav">
-      <div class="logo">FORMAN</div>
-      <div class="nav-right">
-        <div class="nav-links">
-          <a href="https://datlichlamtoc.id.vn/index.html">Trang chủ</a>
-          <a href="https://forman-omega.vercel.app/">Dịch vụ</a>
-          <a href="https://giaodiendatlich.vercel.app/">Khuyến mãi</a>
-          <a href="https://datlichlamtoc.id.vn/about.html">Về chúng tôi</a>
+   <div class="nav-bar">
+        <div class="nav-bar_left">
+            <div class="nav-bar_logo">FORMAN</div>
         </div>
-       <a href="https://tranthitrucly.io.vn/loginuser" class="btn-login">Đăng nhập</a>
-      </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm dịch vụ...">
+            <button title="Tìm kiếm">🔍</button>
+        </div>
+        <div class="nav-bar_right">
+            <button class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-bar_menu" id="navMenu">
+                <a href="https://datlichlamtoc.id.vn/index.html#">Trang chủ</a>
+                <a href="https://forman-omega.vercel.app/service.html">Dịch vụ</a>
+                <a href="https://giaodiendatlich.vercel.app/index.html">Khuyến mãi</a>
+                <a href="https://datlichlamtoc.id.vn/about.html">Về chúng tôi</a>
+                <div class="form_button">
+                    <a href="https://tranthitrucly.io.vn/loginuser" class="btn-action nav-login-btn">Đăng nhập</a>
+                </div>
+            </div>
+        </div>
     </div>
   </header>
 
@@ -310,45 +761,68 @@ header {
     <div class="promo-grid" id="promoGrid"></div>
   </div>
 
-  <!-- FOOTER (giữ nguyên) -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-column">
-        <h3>VỀ CHÚNG TÔI</h3>
-        <ul>
-          <li><a href="https://datlichlamtoc.id.vn/about.html">Giới thiệu về FORMAN</a></li>
-          <li><a href="#">Tin tức</a></li>
-          <li><a href="#">Tìm FORMAN gần nhất</a></li>
-          <li><a href="#">Blog chăm sóc tóc</a></li>
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h3>LIÊN HỆ</h3>
-        <ul>
-          <li>HOTLINE: <strong>1900.27.27.03</strong></li>
-          <li>EMAIL: formanvn@gmail.com</li>
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h3>THÔNG TIN</h3>
-        <ul>
-          <li>Giờ phục vụ: Thứ 2 - Chủ Nhật, 8h30 - 20h30</li>
-          <li><a href="#">Chính sách bảo mật</a></li>
-          <li><a href="#">Điều kiện giao dịch chung</a></li>
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h3>HÌNH THỨC THANH TOÁN</h3>
-        <div class="payment-methods">
-          <img src="/image/money.jpg" alt="Tiền mặt">
-          <img src="/image/qr.jpg" alt="Chuyển khoản">
-          <img src="/image/apple_pay.jpg" alt="Apple Pay">
-          <img src="/image/visa.jpg" alt="Visa">
-          <img src="/image/mastercard.jpg" alt="Mastercard">
+  <!-- FOOTER  -->
+ <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-column">
+                <div class="footer-title">Về chúng tôi</div>
+                <ul class="footer-list">
+                    <li><a href="https://datlichlamtoc.id.vn/about.html">Giới thiệu về FORMAN</a></li>
+                    <li><a href="https://datlichlamtoc.id.vn/blog.html">Blog chăm sóc tóc</a></li>
+                </ul>
+            </div>
+
+
+            <div class="footer-column">
+                <div class="footer-title">Liên hệ</div>
+                <ul class="footer-list">
+                    <li class="contact-info">
+                        <span class="label">Hotline:</span>
+                        <a href="tel:1900272703">1900.27.27.03</a>
+                    </li>
+                    <li class="contact-info">
+                        <span class="label">Email:</span>
+                        <a href="mailto:formanvn@gmail.com">formanvn@gmail.com</a>
+                    </li>
+                    <li class="contact-info">
+                        <span class="label">Địa chỉ:</span>
+                        <span>123 Đường ABC, Quận XYZ, TP. HCM</span>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="footer-column">
+                <div class="footer-title">Thông tin</div>
+                <ul class="footer-list">
+                    <li class="contact-info">
+                        <span class="label">Giờ phục vụ:</span>
+                        <span>Thứ 2 - Chủ Nhật, 8h30 - 20h30</span>
+                    </li>
+                    <li><a href="https://datlichlamtoc.id.vn/privacy-policy.html">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+
+
+
+            <div class="footer-column">
+                <div class="payment-section">
+                    <p class="payment-title">Hình thức thanh toán</p>
+                    <div class="payment-icons">
+                        <img src="image/money.jpg" alt="Tiền mặt" class="payment-icon">
+                        <img src="image/qr.jpg" alt="Chuyển khoản" class="payment-icon">
+                        <img src="image/apple_pay.jpg" alt="Apple Pay" class="payment-icon">
+                        <img src="image/visa.jpg" alt="Visa" class="payment-icon">
+                        <img src="image/mastercard.jpg" alt="Mastercard" class="payment-icon">
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </footer>
+        </div>
+
+
+    </footer>
 
   <script>
     const apiResponse = {
@@ -410,6 +884,7 @@ header {
     }
 
     window.onload = renderPromos;
+
   </script>
   <div style="
 position: fixed;
@@ -429,5 +904,6 @@ cursor: pointer;
 onclick="window.scrollTo({top:0,behavior:'smooth'})">
 ↑
 </div>
+<script src="main.js"></script>
 </body>
 </html>
